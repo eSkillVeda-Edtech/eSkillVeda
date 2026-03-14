@@ -1,0 +1,163 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  border-radius: 0.5rem;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #0b3b74;
+  outline: none;
+  transition: all 0.3s ease;
+  min-width: 36px;
+  min-height: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.pagination button:disabled {
+  background: var(--gray-400);
+  color: var(--text-inverse);
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pagination button:active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 0.1s;
+}
+
+/* Default pagination buttons */
+.PButtons {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  border: 1px solid rgba(11, 59, 116, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.PButtons:hover {
+  background: #2a68a3;
+  color: white;
+  border-color: #2a68a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 104, 163, 0.4);
+}
+
+/* Previous/Next and Active page buttons - Your blue theme */
+.PNpage,
+.active-page {
+  background: #0b3b74;
+  color: white;
+  font-weight: 700;
+  border: 1px solid #0b3b74;
+}
+
+.PNpage:hover {
+  background: #2a68a3;
+  border-color: #2a68a3;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(42, 104, 163, 0.5);
+}
+
+.ellipsis {
+  padding: 4px 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  line-height: 1;
+}
+
+.pagination.light .PButtons,
+.pagination.dark .PButtons {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  border: 1px solid rgba(11, 59, 116, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.pagination.light .PButtons:hover,
+.pagination.dark .PButtons:hover {
+  background: #2a68a3;
+  color: white;
+  border-color: #2a68a3;
+  box-shadow: 0 4px 12px rgba(42, 104, 163, 0.4);
+}
+
+
+.pagination.light .PNpage:hover,
+.pagination.dark .PNpage:hover {
+  background: #2a68a3;
+  border-color: #2a68a3;
+  box-shadow: 0 6px 15px rgba(42, 104, 163, 0.5);
+}
+
+.pagination.light .active-page:hover,
+.pagination.dark .active-page:hover {
+  box-shadow: 0 0 0 3px rgba(11, 59, 116, 0.4), 
+              0 6px 15px rgba(11, 59, 116, 0.7);
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    margin: 12px 0;
+    gap: 6px;
+  }
+
+  .pagination button {
+    padding: 6px 10px;
+    font-size: 13px;
+    min-width: 32px;
+    min-height: 32px;
+    height: 32px;
+  }
+
+  .ellipsis {
+    padding: 3px 5px;
+    font-size: 13px;
+  }
+
+  /* Reduce shadows on mobile */
+  .PNpage,
+  .active-page {
+    box-shadow: 0 2px 6px rgba(11, 59, 116, 0.4);
+  }
+
+  .PNpage:hover {
+    box-shadow: 0 3px 8px rgba(42, 104, 163, 0.4);
+  }
+
+  .PButtons:hover {
+    box-shadow: 0 2px 8px rgba(42, 104, 163, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    margin: 10px 0;
+    gap: 4px;
+  }
+
+  .pagination button {
+    padding: 5px 8px;
+    font-size: 12px;
+    min-width: 28px;
+    min-height: 28px;
+    height: 28px;
+  }
+
+  .ellipsis {
+    padding: 2px 4px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    @page { size: A4; margin: 0.7cm;
+    }
+    body { font-family: Calibri, sans-serif; font-size: 11pt; font-weight: 600; line-height: 1.5; color: #000; margin: 0;
+      padding: 15px;
+    }
+    h1 { font-size: 18pt; font-weight: 600; margin: 0 0 4px;
+    }
+    h2 { font-size: 11pt; font-weight: 600; margin: 12px 0 4px; border-bottom: 1px solid #666;
+    }
+    p, li { margin: 4px 0; line-height: 1.6;
+    }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      justify-content: center;
+      align-items: center;
+    }
+    ul { padding-left: 18px; margin: 0 0 10px 0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    .section {
+      margin-bottom: 20px;
+      break-inside: avoid;
+    }
+    .job-header {
+      margin-bottom: 8px;
+    }
+    .job-title {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 11pt;
+    }
+    .company-duration {
+      color: #7f8c8d;
+      font-size: 9pt;
+      margin-top: 2px;
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+    .project-name {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .project-year {
+      color: #7f8c8d;
+      font-size: 9pt;
+    }
+    .education-item {
+      margin-bottom: 10px;
+    }
+    .degree {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .institute-year {
+      color: #7f8c8d;
+      font-size: 9pt;
+    }
+    @media print {
+      body {
+        padding: 0;
+      }
+      .skills-grid, .skills {
+        justify-content: flex-start;
+        gap: 4px 6px !important;
+      }
+      .skills-grid li, .skills li {
+        padding: 4px 8px !important;
+        font-size: 8pt !important;
+      }
+      .section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ Contact.Name }}</h1>
+  <p>{{ Contact.Email }} | {{ Contact.Phone }} | <a href="{{ Contact.LinkedIn }}">LinkedIn</a></p>
+
+  {% if Summary %}<h2>Summary</h2>{% for s in Summary %}<p>{{ s }}</p>{% endfor %}{% endif %}
+  {% if Skills %}<h2>Skills</h2><ul class="skills-grid">{% for skill in Skills %}<li>{{ skill }}</li>{% endfor %}</ul>{% endif %}
+  {% if Experience %}<h2>Experience</h2>
+    {% for e in Experience %}
+      <div class="job-header">
+        <div class="job-title">{{ e.Role }}</div>
+        <div class="company-duration">{{ e.Company }} | {{ e.Duration }}</div>
+      </div>
+      <ul>
+        {% for d in e.Description %}<li>{{ d }}</li>{% endfor %}
+      </ul>
+    {% endfor %}
+  {% endif %}
+  {% if Projects %}<h2>Projects</h2>
+    {% for p in Projects %}
+      <div class="project-header">
+        <span class="project-name">{{ p.Name }}</span>
+        <span class="project-year">{{ p.Year }}</span>
+      </div>
+      {% if p.Description is iterable and p.Description is not string %}
+        <ul>
+        {% for point in p.Description %}
+          <li>{{ point }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p>{{ p.Description }}</p>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if Education %}<h2>Education</h2>{% for e in Education %}<p>{{ e.Degree }}, {{ e.Institute }} ({{ e.Year }})</p>{% endfor %}{% endif %}
+  {% if Certification %}<h2>Certifications</h2><ul>{% for c in Certification %}<li>{{ c }}</li>{% endfor %}</ul>{% endif %}
+</body>
+</html>

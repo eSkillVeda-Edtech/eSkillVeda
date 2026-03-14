@@ -1,0 +1,374 @@
+/* Navbar Variables */
+:root {
+  --navbar-height: 60px;
+}
+
+/* Main Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: var(--navbar-height);
+  background: var(--background);
+  border-bottom: 1px solid var(--subtle-borders);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand .brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.brand-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-link:hover {
+  font-weight: 500;
+  text-decoration: #ffffff;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+
+/* Right Actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--subtle-borders);
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+/* Desktop Auth */
+.desktop-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.logout-btn, .login-btn {
+  padding: 0.35rem 1rem;
+  border-radius: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--subtle-borders);
+}
+
+.logout-btn {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--subtle-borders);
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.login-btn {
+  border: 1px solid var(--subtle-borders);
+}
+
+.login-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1001;
+}
+
+.mobile-menu-btn:hover {
+  background: var(--subtle-borders);
+  color: var(--primary-blue);
+}
+
+/* Mobile Menu Overlay */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+}
+
+/* Mobile Menu with slide animation */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: var(--background);
+  border-left: 1px solid var(--subtle-borders);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 1rem;
+  padding-top: 2rem;
+  overflow-y: hidden;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+/* Mobile Navigation Links */
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.mobile-nav-link {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  background: var(--subtle-borders);
+  color: var(--primary-blue);
+}
+
+/* Mobile Auth Section */
+.mobile-auth {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--subtle-borders);
+}
+
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+/* Mobile Auth Buttons - Side by Side */
+.mobile-auth-buttons {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.mobile-dashboard-btn, 
+.mobile-logout-btn, 
+.mobile-login-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-align: center;
+}
+
+.mobile-dashboard-btn {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.mobile-dashboard-btn:hover {
+  background: var(--primary-blue-hover);
+}
+
+.mobile-logout-btn {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--subtle-borders);
+}
+
+.mobile-logout-btn:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.mobile-login-btn {
+  border: 1px solid var(--subtle-borders);
+  background: var(--primary-blue);
+  color: white;
+}
+
+.mobile-login-btn:hover {
+  background: var(--primary-blue-hover);
+}
+
+/* Profile Icon Button */
+.profile-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--subtle-borders);
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-icon-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .desktop-auth {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .brand-text {
+    font-size: 1.5rem;
+  }
+
+  .mobile-menu {
+    width: 280px;
+    right: -280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .brand-text {
+    font-size: 1.3rem;
+  }
+
+  .mobile-menu {
+    width: 100vw;
+    right: -100vw;
+  }
+}
+
+/* Stack buttons only on very tiny screens */
+@media (max-width: 350px) {
+  .mobile-auth-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mobile-dashboard-btn,
+  .mobile-logout-btn,
+  .mobile-login-btn {
+    flex: none;
+  }
+}
+
+/* Responsive font sizes for the brand */
+@media (max-width: 768px) {
+  .navbar-brand div {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand div {
+    font-size: 1.3rem;
+  }
+}

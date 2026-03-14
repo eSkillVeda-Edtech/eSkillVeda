@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume - {{ Contact.Name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5cm;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #2c3e50;
+            background: #ffffff;
+            margin: 0;
+            padding: 12px;
+        }
+
+        .resume-container {
+            max-width: 100%;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ffffff;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 10px solid #34495e;
+        }
+
+        .name {
+            font-size: 28pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-size: 14pt;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* FIXED: Contact Info - Table layout for PDF consistency */
+        .contact-info {
+            width: 100%;
+            text-align: center;
+            font-size: 9pt;
+            font-weight: 400;
+        }
+
+        .contact-row {
+            display: table;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: table-cell;
+            padding: 0 15px;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        .contact-item a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        /* FIXED: Main Content - Table layout instead of Grid/Flex */
+        .main-content {
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+            border-spacing: 0;
+            padding: 30px;
+        }
+
+        /* Left Column */
+        .left-column {
+            display: table-cell;
+            width: 65%;
+            vertical-align: top;
+            padding-right: 15px;
+        }
+
+        /* Right Column */
+        .right-column {
+            display: table-cell;
+            width: 35%;
+            vertical-align: top;
+            border-left: 2px solid #ecf0f1;
+            padding-left: 25px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-header:first-child {
+            margin-top: 0;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #2c3e50;
+        }
+
+        /* Summary Section */
+        .summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+
+        .summary p {
+            margin-bottom: 12px;
+            font-size: 10pt;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .summary p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 25px;
+            padding: 18px;
+            background: #ffffff;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .company-name {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 6px;
+        }
+
+        .job-duration {
+            font-size: 9pt;
+            color: #7f8c8d;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .job-responsibilities {
+            list-style: none;
+            margin: 12px 0 0 0;
+            padding: 0;
+        }
+
+        .job-responsibilities li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .job-responsibilities li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .degree {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .institute {
+            font-size: 10pt;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .edu-year {
+            font-size: 9pt;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .project-item {
+            margin-bottom: 18px;
+            padding: 15px;
+            background: #ffffff;
+            border: 1px solid #e8eaed;
+            border-radius: 6px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .project-name {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .project-year {
+            font-size: 9pt;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .project-description {
+            font-size: 9pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* FIXED: Skills Section - Inline layout for PDF */
+        .skills-container {
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #3498db;
+            color: #ffffff;
+            padding: 6px 12px;
+            margin: 2px 4px 4px 0;
+            font-size: 8pt;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        /* Certifications Section */
+        .certifications-list {
+            list-style: none;
+            margin: 10px 0 0 0;
+            padding: 0;
+        }
+
+        .certifications-list li {
+            position: relative;
+            padding: 8px 0 8px 25px;
+            margin-bottom: 6px;
+            font-size: 9pt;
+            line-height: 1.4;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .certifications-list li:last-child {
+            border-bottom: none;
+        }
+
+        .certifications-list li::before {
+            content: '🏆';
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        /* Responsive Design */
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .experience-item:hover {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+            
+            .skill-tag:hover {
+                transform: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .right-column {
+                border-left: none;
+                border-top: 2px solid #ecf0f1;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="name">{{ Contact.Name }}</div>
+            <div class="contact-info">
+                <div class="contact-row">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <a href="mailto:{{ Contact.Email }}">{{ Contact.Email }}</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>{{ Contact.Phone }}</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="{{ Contact.LinkedIn }}" target="_blank">LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Summary -->
+                {% if Summary %}
+                <div class="section-header">Summary</div>
+                <div class="summary">
+                    {% for line in Summary %}
+                    <p>{{ line }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+{% if Experience %}
+                <div class="section-header">Experience</div>
+                {% for exp in Experience %}
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">{{ exp.Role }}</div>
+                            <div class="company-name">{{ exp.Company }}</div>
+                        </div>
+                        <div class="job-duration">{{ exp.Duration }}</div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        {% for desc in exp.Description %}
+                        <li>{{ desc }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if Projects %}
+                <div class="section-header">Projects</div>
+                {% for project in Projects %}
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">{{ project.Name }}</div>
+                            <div class="company-name">{{ project.Company }}</div>
+                        </div>
+                        <div class="job-duration">{{ project.Year }}</div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        {% for desc in project.Description %}
+                        <li>{{ desc }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Technical Skills -->
+                {% if Skills %}
+                <div class="section-header">Technical Skills</div>
+                <div class="skills-container">
+                    {% for skill in Skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Education -->
+                {% if Education %}
+                <div class="section-header">Education</div>
+                {% for edu in Education %}
+                <div class="education-item">
+                    <div class="degree">{{ edu.Degree }}</div>
+                    <div class="institute">{{ edu.Institute }}</div>
+                    <div class="edu-year">{{ edu.Year }}</div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <!-- Certifications -->
+                {% if Certification %}
+                <div class="section-header">Certifications</div>
+                <ul class="certifications-list">
+                    {% for cert in Certification %}
+                    <li>{{ cert }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

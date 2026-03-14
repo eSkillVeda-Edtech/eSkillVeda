@@ -1,0 +1,553 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@import './theme.css';
+@import './styleComponents.css';
+
+
+/* Add custom fonts */
+@font-face {
+  font-family: 'AligarhItalic';
+  src: url('/fonts/Aligarh-Italic.woff2') format('woff2'),
+       url('/fonts/Aligarh-Italic.woff') format('woff');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PlatoonMedium';
+  src: url('/fonts/Platoon-Medium.woff2') format('woff2'),
+       url('/fonts/Platoon-Medium.woff') format('woff');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* Custom properties and utility classes */
+:root {
+  --font-aligarh: 'AligarhItalic', serif;
+  --font-platoon: 'PlatoonMedium', sans-serif;
+  --color-es-yellow: #fcd00f;
+  --color-es-blue: #0c53a0;
+}
+
+/* Utility classes */
+.font-aligarh {
+  font-family: var(--font-aligarh);
+}
+
+.font-platoon {
+  font-family: var(--font-platoon);
+}
+
+.text-es-yellow {
+  color: var(--color-es-yellow);
+}
+
+.text-es-blue {
+  color: var(--color-es-blue);
+}
+
+/* Global Professional Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  word-break: break-word;
+  margin: 0;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Theme-based background images */
+[data-theme='light'] body {
+  background-image: url('light-theme-bg.jpg');
+}
+
+[data-theme='dark'] body {
+  background-image: url('dark-theme-bg.jpg');
+}
+
+/* Professional Base Elements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1.125rem; }
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Links with gradient color */
+a {
+  color: var(--primary-blue-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-blue);
+}
+
+/* List Styles for Blog Content and Rich Text Editor */
+.blog-content ul,
+.prose-editor ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-left: 1.5rem;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.blog-content ol,
+.prose-editor ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  margin-left: 1.5rem;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.blog-content li,
+.prose-editor li {
+  display: list-item;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* ========================================= */
+/* GLOBAL FOCUS BORDER REMOVAL */
+/* ========================================= */
+*:focus,
+*:focus-visible,
+button:focus,
+button:focus-visible,
+textarea:focus,
+select:focus,
+a:focus,
+div:focus,
+[tabindex]:focus,
+.btn:focus,
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-outline:focus,
+.btn-accent:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove Firefox inner focus border */
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Professional Form Elements */
+input, textarea, select {
+  background-color: var(--surface);
+  border: 2px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Professional Button Base with Gradient */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Primary gradient buttons */
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-gradient-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 80, 157, 0.3);
+}
+
+.btn-primary:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Secondary gradient buttons */
+.btn-secondary {
+  background: var(--accent-gradient);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 80, 157, 0.3);
+}
+
+.btn-secondary:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Outline buttons with gradient border */
+.btn-outline {
+  background: transparent;
+  color: var(--primary-blue);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--border-gradient);
+  border-radius: 0.5rem;
+  z-index: -1;
+  margin: -2px;
+}
+
+.btn-outline:hover {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-outline:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+button:focus, button:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient border utility */
+.gradient-border {
+  border: 2px solid transparent;
+  background: var(--border-gradient) border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Gradient background utilities */
+.bg-primary-gradient {
+  background: var(--primary-gradient);
+}
+
+.bg-accent-gradient {
+  background: var(--accent-gradient);
+}
+
+/* Utility Classes */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Professional Selection with gradient */
+::selection {
+  background: rgba(0, 80, 157, 0.2);
+  color: var(--text-primary);
+}
+
+/* ========================================= */
+/* GLOBAL CURSOR AND CARET PREVENTION */
+/* ========================================= */
+
+/* Prevent text cursor on all elements by default */
+* {
+  cursor: default !important;
+}
+
+/* Force prevent text/I-beam cursor everywhere */
+*,
+*::before,
+*::after,
+html,
+body,
+div,
+span,
+p,
+h1, h2, h3, h4, h5, h6,
+section,
+article,
+aside,
+nav,
+header,
+footer,
+main,
+button,
+a,
+img,
+svg,
+canvas {
+  cursor: default !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Prevent blinking caret/cursor on all elements */
+* {
+  caret-color: transparent !important;
+}
+
+/* Remove contenteditable behavior from all elements */
+*[contenteditable],
+*[contenteditable="true"] {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+  cursor: default !important;
+}
+
+/* Prevent text selection and cursor on pseudo-elements */
+*::before,
+*::after {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  cursor: default !important;
+}
+
+/* SPECIFIC OVERRIDES FOR INTERACTIVE ELEMENTS */
+
+/* Allow proper cursor for buttons and links */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-accent,
+a,
+[role="button"],
+[onclick],
+.clickable,
+.cursor-pointer {
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Allow text cursor and selection ONLY for actual input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+.text-input,
+.form-input,
+.search-input,
+.blog-search,
+.courses-search,
+[role="textbox"],
+.editable-content {
+  cursor: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  caret-color: var(--primary-blue) !important;
+}
+
+/* Allow text selection for readable content areas */
+.blog-content,
+.course-description,
+.text-selectable,
+.prose,
+.content-area,
+p.selectable,
+.blog-card-info,
+.course-card-info {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  cursor: default !important;
+  caret-color: transparent !important;
+}
+
+/* Prevent caret on hover states */
+*:hover {
+  caret-color: transparent !important;
+}
+
+/* Force override any webkit appearance that might cause cursor issues */
+*::-webkit-input-placeholder,
+*::-moz-placeholder,
+*:-ms-input-placeholder,
+*:-moz-placeholder {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Prevent cursor on disabled elements */
+*:disabled,
+.disabled {
+  cursor: not-allowed !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Additional safety for common problematic elements */
+div[tabindex],
+span[tabindex],
+.focus-trap,
+.modal-content,
+.dropdown-content,
+.tooltip {
+  cursor: default !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Override any third-party library cursor styles */
+.react-select,
+.select-container,
+.dropdown-select {
+  cursor: pointer !important;
+  caret-color: transparent !important;
+}
+
+/* Prevent cursor issues in card components */
+.blog-card,
+.course-card,
+.card,
+.card-body {
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Override focus states that might cause cursor issues */
+*:focus,
+*:focus-visible,
+*:focus-within {
+  caret-color: transparent !important;
+}
+
+/* Only allow caret in actual input focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  caret-color: var(--primary-blue) !important;
+}

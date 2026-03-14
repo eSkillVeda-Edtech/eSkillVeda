@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* --- General & Print Optimization --- */
+@page {
+size: A4;
+margin: 0;
+}
+* {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 100%;
+font-family: 'Segoe UI', Tahoma, sans-serif;
+font-size: 10pt;
+line-height: 1.5;
+background: #FBFCFC; /* Set a default background color */
+}
+/* --- CHANGE: Faux column with a linear gradient on a new wrapper --- */
+.resume-wrapper {
+background: linear-gradient(to right, #4A235A 32%, #FBFCFC 32%);
+width: 210mm; /* A4 width */
+height: 297mm; /* A4 height */
+}
+.columns {
+display: flex;
+flex-grow: 1;
+height: 100%; /* Ensure columns fill wrapper height */
+}
+.left {
+display: flex;
+flex-direction: column;
+width: 32%;
+vertical-align: top;
+color: #fff;
+padding: 25px 20px;
+position: relative;
+}
+.left::before {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 1px;
+height: 100%;
+background: rgba(255, 255, 255, 0.2);
+}
+.right {
+display: flex;
+flex-direction: column;
+width: 68%;
+vertical-align: top;
+color: #333;
+padding: 25px 30px;
+}
+.header-info {
+margin-bottom: 25px;
+}
+h1 {
+font-size: 18pt;
+font-weight: 700;
+margin: 0 0 5px 0;
+letter-spacing: 0.5px;
+}
+.contact-item {
+margin: 5px 0;
+font-size: 9pt;
+line-height: 1.5;
+}
+.contact-item a {
+color: rgba(255, 255, 255, 0.9);
+text-decoration: none;
+border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+}
+.contact-item a:hover {
+color: white;
+border-bottom-style: solid;
+}
+h2 {
+font-size: 12pt;
+font-weight: 600;
+color: #4A235A;
+border-bottom: 2px solid #4A235A;
+padding-bottom: 5px;
+margin: 20px 0 12px 0;
+text-transform: uppercase;
+letter-spacing: 0.8px;
+}
+h3 {
+font-size: 11pt;
+font-weight: 600;
+margin: 18px 0 8px 0;
+color: rgba(255, 255, 255, 0.95);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+padding-bottom: 3px;
+}
+ul {
+margin: 8px 0 15px 0;
+padding-left: 18px;
+}
+ul li {
+margin: 5px 0;
+line-height: 1.5;
+}
+.skills-grid {
+list-style: none;
+padding: 0;
+margin: 10px 0;
+}
+.skills-grid li {
+background: rgba(255, 255, 255, 0.15);
+padding: 6px 12px;
+margin: 4px 0;
+border-radius: 15px;
+font-size: 9pt;
+border-left: 3px solid rgba(255, 255, 255, 0.6);
+display: block;
+width: 100%;
+}
+.section {
+margin-bottom: 20px;
+break-inside: avoid;
+}
+.left-section {
+margin-bottom: 25px;
+}
+.job-header {
+margin-bottom: 8px;
+}
+.job-title {
+font-weight: 600;
+color: #4A235A;
+font-size: 11pt;
+}
+.company-duration {
+color: #7f8c8d;
+font-size: 9pt;
+margin-top: 2px;
+}
+.project-header {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+margin-bottom: 5px;
+flex-wrap: wrap;
+}
+.project-name {
+font-weight: 600;
+color: #4A235A;
+display: block;
+}
+.project-year {
+color: #7f8c8d;
+font-size: 9pt;
+display: block;
+}
+.education-item {
+margin-bottom: 10px;
+}
+.degree {
+font-weight: 600;
+color: #4A235A;
+}
+.institute-year {
+color: #7f8c8d;
+font-size: 9pt;
+}
+.certification-list {
+padding-left: 0;
+list-style: none;
+}
+.certification-list li {
+background: rgba(255, 255, 255, 0.1);
+margin: 6px 0;
+padding: 8px 12px;
+border-radius: 10px;
+font-size: 9pt;
+border-left: 3px solid rgba(255, 255, 255, 0.6);
+display: block;
+width: 100%;
+}
+@media screen {
+.left {
+background: linear-gradient(135deg, #4A235A, #6C3483);
+}
+h1 {
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.project-header {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+flex-wrap: wrap;
+}
+.project-name {
+display: inline;
+}
+.project-year {
+display: inline;
+}
+}
+@media print {
+body {
+-webkit-print-color-adjust: exact;
+print-color-adjust: exact;
+}
+/* Re-apply the faux column background in print mode */
+.resume-wrapper {
+background: linear-gradient(to right, #4A235A 32%, #FBFCFC 32%) !important;
+}
+.left, .right {
+display: table-cell;
+width: 32%;
+vertical-align: top;
+}
+.right {
+width: 68%;
+}
+.section {
+page-break-inside: avoid;
+}
+.skills-grid li, .certification-list li {
+page-break-inside: avoid;
+word-wrap: break-word;
+}
+.contact-item {
+page-break-inside: avoid;
+}
+}
+</style>
+</head>
+<body>
+<div class="resume-wrapper">
+<div class="columns">
+<div class="left">
+<div class="header-info">
+<h1>{{ Contact.Name }}</h1>
+<div class="contact-item">📧 {{ Contact.Email }}</div>
+<div class="contact-item">📱 {{ Contact.Phone }}</div>
+<div class="contact-item">
+🔗 <a href="{{ Contact.LinkedIn }}">LinkedIn Profile</a>
+</div>
+</div>
+{% if Skills %}
+<div class="left-section">
+<h3>Skills & Technologies</h3>
+<ul class="skills-grid">
+{% for skill in Skills %}
+<li>{{ skill }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+{% if Certification %}
+<div class="left-section">
+<h3>Certifications</h3>
+<ul class="certification-list">
+{% for c in Certification %}
+<li>{{ c }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+</div>
+<div class="right">
+{% if Summary %}
+<div class="section">
+<h2>Professional Summary</h2>
+{% for s in Summary %}
+<p>{{ s }}</p>
+{% endfor %}
+</div>
+{% endif %}
+{% if Experience %}
+<div class="section">
+<h2>Professional Experience</h2>
+{% for e in Experience %}
+<div class="job-header">
+<div class="job-title">{{ e.Role }}</div>
+<div class="company-duration">{{ e.Company }} | {{ e.Duration }}</div>
+</div>
+<ul>
+{% for d in e.Description %}
+<li>{{ d }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
+</div>
+{% endif %}
+{% if Projects %}
+<div class="section">
+<h2>Notable Projects</h2>
+{% for p in Projects %}
+<div class="project-header">
+<span class="project-name">{{ p.Name }}</span>
+<span class="project-year">{{ p.Year }}</span>
+</div>
+{% if p.Description is iterable and p.Description is not string %}
+<ul>
+{% for point in p.Description %}
+<li>{{ point }}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>{{ p.Description }}</p>
+{% endif %}
+{% endfor %}
+</div>
+{% endif %}
+{% if Education %}
+<div class="section">
+<h2>Education</h2>
+{% for e in Education %}
+<div class="education-item">
+<div class="degree">{{ e.Degree }}</div>
+<div class="institute-year">{{ e.Institute }} | {{ e.Year }}</div>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</body>
+</html>

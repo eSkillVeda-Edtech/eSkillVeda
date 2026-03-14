@@ -1,0 +1,70 @@
+{
+  "programming_languages": [
+    "Assembly", "C#","C", "C++", "COBOL", "Clojure", "Dart", "Erlang", "Fortran", "Go", "Haskell", "Java", "JavaScript", "Julia", "Kotlin", "Lua", "MATLAB", "Objective-C", "PHP", "Perl", "PowerShell", "Python", "R", "Ruby", "Rust", "Scala", "Shell Scripting", "Swift", "TypeScript", "VB.NET"
+  ],
+  "web_development": [
+    "Alpine.js", "Angular", "Astro", "Bootstrap", "CSS", "Django", "EJS", "Ember.js", "Express.js", "Flask", "Gatsby", "GraphQL", "HTML", "Handlebars", "Hugo", "JAMstack", "JQuery", "Lit", "Marionette.js", "Meteor", "Mustache.js", "Next.js", "Node.js", "Nuxt.js", "Phoenix", "Polymer", "Preact", "REST APIs", "React", "Remix", "SASS", "SCSS", "Stencil", "StencilJS", "Stimulus", "Stitches", "Svelte", "Tachyons", "Tailwind CSS", "Turbolinks", "Umi.js", "Vite", "Vue.js", "Webpack", "Yew"
+  ],
+  "databases": [
+    "Amazon Aurora", "Cassandra", "CouchDB", "DB2", "DynamoDB", "Elasticsearch", "Firebase", "FoundationDB", "Google BigQuery", "HBase", "InfluxDB", "MariaDB", "MarkLogic", "Memcached", "MongoDB", "MySQL", "Neo4j", "OpenTSDB", "Oracle", "PgBouncer", "PostgreSQL", "Redis", "SQL Server", "SQLite", "Supabase", "TimescaleDB"
+  ],
+  "cloud_platforms": [
+    "Amazon Web Services (AWS)", "Ansible", "Azure DevOps", "CloudFlare", "CloudStack", "DigitalOcean", "Docker", "Google Cloud Platform (GCP)", "Heroku", "Jenkins", "Kubernetes", "Microsoft Azure", "Netlify", "OpenStack", "Rancher", "Scaleway", "Terraform", "Vercel"
+  ],
+  "data_science": [
+    "Airflow", "Amazon SageMaker", "Apache Spark", "Azure Machine Learning", "Data Analysis", "Dataiku", "Deep Learning", "Google Colab", "Google Vertex AI", "H2O.ai", "Hadoop", "Jupyter", "KNIME", "Kafka", "Keras", "MLflow", "Machine Learning", "NumPy", "Pandas", "Power BI", "PyTorch", "RapidMiner", "Scikit-learn", "Tableau", "TensorFlow"
+  ],
+  "mobile_development": [
+    "Android Development", "Apache Cordova", "Cordova", "Flutter", "Ionic", "NativeScript", "React Native", "Sencha Touch", "Unity", "Xamarin", "iOS Development"
+  ],
+  "devops": [
+    "AWS CloudFormation", "AWS DevOps", "Ansible", "Azure DevOps", "Azure Resource Manager (ARM)", "CI/CD", "Chef", "CircleCI", "Docker", "Git", "GitHub Actions", "GitLab CI", "Google Cloud Deployment Manager", "Jenkins", "Kubernetes", "Logging", "Monitoring", "Puppet", "Terraform", "Travis CI"
+  ],
+  "testing": [
+    "Appium", "Cypress", "Insomnia", "Integration Testing", "JUnit", "Jest", "Playwright", "Postman", "Robot Framework", "Selenium", "Test Automation", "TestCafe", "TestNG", "Unit Testing"
+  ],
+  "soft_skills": [
+    "Adaptability", "Agile Methodology", "Communication", "Conflict Resolution", "Creativity", "Critical Thinking", "Decision Making", "Emotional Intelligence", "Leadership", "Mentoring", "Negotiation", "Problem Solving", "Project Management", "Public Speaking", "Scrum", "Stress Management", "Team Collaboration", "Time Management"
+  ],
+  "design": [
+    "Adobe Animate", "Adobe Creative Suite", "Balsamiq", "Cinema 4D", "CorelDRAW", "Design Systems", "Figma", "GIMP", "InVision", "Inkscape", "Marvel App", "OmniGraffle", "Proto.io", "Prototyping", "Sketch", "UI/UX Design", "User Research", "V-Ray", "Wireframing"
+  ],
+  "security": [
+    "Access Control", "Application Security", "Cloud Security", "Cybersecurity", "Cybersecurity Compliance", "Data Loss Prevention", "Encryption", "Forensics", "Identity Management", "Incident Response", "Information Security Management", "Intrusion Detection Systems (IDS)", "JWT", "Malware Analysis", "Mobile Security", "Network Security", "OAuth", "OWASP", "Penetration Testing", "SSL/TLS", "Security Operations", "Security Policy", "Threat Intelligence", "Vulnerability Assessment"
+  ],
+  "business_management": [
+    "Benchmarking", "Budgeting", "Business Analysis", "Business Development", "Business Process Improvement", "Change Management", "Client Relations", "Contract Management", "Corporate Strategy", "Crisis Management", "Key Account Management", "KPI Reporting", "Lean Management", "Negotiation", "Operations Management", "P&L Management", "Performance Management", "Process Optimization", "Resource Allocation", "Risk Management", "Six Sigma", "Stakeholder Management", "Strategic Planning", "Supply Chain Management", "Vendor Management"
+  ],
+  "finance": [
+    "Accounting (GAAP/IFRS)", "Accounts Payable/Receivable", "Auditing", "Bookkeeping", "Compliance", "Corporate Finance", "Credit Analysis", "Due Diligence", "Financial Analysis", "Financial Modeling", "Financial Reporting", "Forecasting", "Investment Management", "Mergers & Acquisitions (M&A)", "QuickBooks", "Risk Assessment", "Tax Planning", "Treasury Management", "Valuation"
+  ],
+  "marketing": {
+    "sales": [
+      "B2B/B2C Sales", "CRM Software (Salesforce, HubSpot)", "Client Onboarding", "Closing Techniques", "Cold Calling", "Consultative Selling", "Contract Negotiation", "Cross-selling/Up-selling", "Customer Retention", "Lead Generation", "Pipeline Management", "Sales Forecasting", "Territory Management"
+    ],
+    "marketing": [
+      "A/B Testing", "Affiliate Marketing", "Analytics (Google Analytics)", "Brand Management", "Content Marketing", "Conversion Rate Optimization (CRO)", "Copywriting", "Digital Marketing", "Email Marketing", "Event Marketing", "Market Research", "Marketing Automation (Marketo, Pardot)", "PPC Advertising", "Public Relations", "SEO/SEM", "Social Media Marketing"
+    ]
+  },
+  "human_resources": [
+    "Benefits Administration", "Compensation Strategy", "Employee Engagement", "Employee Relations", "HRIS (Workday, SAP)", "Labor Law Compliance", "Onboarding", "Performance Management", "Recruitment", "Succession Planning", "Talent Acquisition", "Training & Development"
+  ],
+  "project_management": [
+    "Agile Methodologies", "Backlog Management", "Budget Management", "Go-to-market Strategy", "Jira", "Kanban", "Lean Startup", "PRD/MRD", "Product Lifecycle Management", "Product Roadmapping", "Project Lifecycle Management", "Project Planning", "Quality Management", "Release Management", "Resource Management", "Risk Management", "Scrum", "Stakeholder Communication", "Trello", "Waterfall"
+  ],
+  "communication": [
+    "Active Listening", "Clarity", "Conflict Resolution", "Cross-cultural Communication", "Empathy", "Feedback Delivery", "Interpersonal Skills", "Negotiation", "Networking", "Nonverbal Communication", "Persuasion", "Presentation Skills", "Public Speaking", "Storytelling", "Verbal Communication", "Written Communication"
+  ],
+  "data_analysis_tools": [
+    "Alteryx", "Excel", "Google Data Studio", "Google Sheets", "Looker", "MicroStrategy", "NumPy", "Pandas", "Power BI", "Python (Pandas, NumPy)", "Qlik", "R", "SAS", "SciPy", "SPSS", "SQL", "Tableau"
+  ],
+  "office_software": [
+    "Airtable", "Asana", "Confluence", "Google Workspace", "Microsoft Office Suite", "Miro", "Monday.com", "Notion", "Slack", "Trello", "Zoom"
+  ],
+  "languages": [
+    "Arabic", "Bengali", "English", "French", "German", "Hindi", "Indonesian", "Italian", "Japanese", "Korean", "Mandarin Chinese", "Portuguese", "Russian", "Spanish", "Swahili"
+  ],
+  "miscellaneous": [
+    "3D Printing", "CAD", "Data Entry", "Event Planning", "Grant Writing", "Photography", "Technical Writing", "Transcription", "Video Editing"
+  ]
+}

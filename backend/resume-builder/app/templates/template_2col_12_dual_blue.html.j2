@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Calibri', sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            height: 100%;
+        }
+
+        /* Use a wrapper with a linear gradient to create the two-column color effect */
+        .resume-wrapper {
+            background: linear-gradient(to right, #0d47a1 35%, #1565c0 35%);
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left {
+            width: 35%;
+            padding: 2cm 1.2cm;
+            color: white;
+        }
+
+        .right {
+            width: 65%;
+            padding: 2cm 1.2cm;
+            color: white;
+        }
+
+        h1 {
+            font-size: 18pt;
+            margin: 0 0 6px;
+        }
+
+        h2 {
+            font-size: 11pt;
+            font-weight: 600;
+            border-bottom: 1px solid #90caf9;
+            color: #e3f2fd;
+            margin: 10px 0 6px;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: 600;
+            margin: 8px 0 4px;
+            color: #e3f2fd;
+        }
+
+        ul {
+            padding-left: 16px;
+            margin: 4px 0 10px 0;
+        }
+
+        .skills-grid {
+            list-style: none;
+            padding: 0;
+        }
+
+        a {
+            color: #bbdefb;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            break-inside: avoid;
+        }
+
+        .job-header {
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: #e3f2fd;
+            font-size: 11pt;
+        }
+
+        .company-duration {
+            color: #bbdefb;
+            font-size: 9pt;
+            margin-top: 2px;
+        }
+
+        .project-header {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .project-name {
+            font-weight: 600;
+            color: #e3f2fd;
+            display: inline;
+        }
+
+        .project-year {
+            color: #bbdefb;
+            font-size: 9pt;
+            display: inline;
+        }
+
+        .education-item {
+            margin-bottom: 10px;
+        }
+
+        .degree {
+            font-weight: 600;
+            color: #e3f2fd;
+        }
+
+        .institute-year {
+            color: #bbdefb;
+            font-size: 9pt;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .resume-wrapper {
+                background: linear-gradient(to right, #0d47a1 35%, #1565c0 35%) !important;
+                height: 297mm;
+                width: 210mm;
+            }
+
+            .container {
+                display: flex;
+                height: 100%;
+                width: 100%;
+            }
+
+            .left {
+                width: 35%;
+            }
+
+            .right {
+                width: 65%;
+            }
+
+            .skills-grid,
+            .skills {
+                justify-content: flex-start;
+                gap: 4px 6px !important;
+            }
+
+            .skills-grid li,
+            .skills li {
+                padding: 4px 8px !important;
+                font-size: 8pt !important;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-wrapper">
+        <div class="container">
+            <div class="left">
+                <h1>{{ Contact.Name }}</h1>
+                <div class="education-item">
+                    <div class="degree">{{ Contact.Email }}<br>{{ Contact.Phone }}<br><a href="{{ Contact.LinkedIn }}">LinkedIn</a></div>
+                </div>
+                {% if Skills %}
+                <h3>Skills</h3>
+                <ul>
+                    {% for skill in Skills %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if Certification %}
+                <h3>Certifications</h3>
+                <ul>
+                    {% for c in Certification %}
+                    <li>{{ c }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="right">
+                {% if Summary %}
+                <div class="section">
+                    <h2>Summary</h2>
+                    {% for s in Summary %}
+                    <p>{{ s }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if Experience %}
+                <div class="section">
+                    <h2>Experience</h2>
+                    {% for e in Experience %}
+                    <div class="job-header">
+                        <div class="job-title">{{ e.Role }}</div>
+                        <div class="company-duration">{{ e.Company }} | {{ e.Duration }}</div>
+                    </div>
+                    <ul>
+                        {% for d in e.Description %}
+                        <li>{{ d }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if Projects %}
+                <div class="section">
+                    <h2>Projects</h2>
+                    {% for p in Projects %}
+                    <div class="project-header">
+                        <span class="project-name">{{ p.Name }}</span>
+                        <span class="project-year">({{ p.Year }})</span>
+                    </div>
+                    {% if p.Description is iterable and p.Description is not string %}
+                    <ul>
+                        {% for point in p.Description %}
+                        <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>{{ p.Description }}</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if Education %}
+                <div class="section">
+                    <h2>Education</h2>
+                    <ul>
+                        {% for e in Education %}
+                        <li>{{ e.Degree }} – {{ e.Institute }} ({{ e.Year }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

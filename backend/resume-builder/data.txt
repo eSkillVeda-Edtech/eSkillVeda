@@ -1,0 +1,13 @@
+**Work experience**: 
+url: http://127.0.0.1:8000/experience
+{
+  "description": "I worked as a frontend developer at a startup. I made several UI components using React and fixed bugs. Also collaborated with backend for integration. We had daily standups and used Git for version control."
+}
+
+
+
+**Project description**: 
+url: http://127.0.0.1:8000/project
+{
+  "description": "I built a project called Trackmail. It doesn't send emails directly. Instead, it generates a token with a hidden tracking pixel and a unique track ID. The user just pastes that token into their email (like Gmail). After sending, the sender submits the token on the Trackmail site to track email opens. It's built with Node.js, Express, and MongoDB, and deployed on Vercel."
+}

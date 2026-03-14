@@ -1,0 +1,949 @@
+/* UserForm_Separate.css - Fixed skills alignment issue */
+
+/* === CSS VARIABLES FOR USER FORM === */
+:root {
+  --uf-surface-card-light: #ffffff;
+  --uf-card-border-light: #e2e8f0;
+  --uf-card-shadow-light: 0 4px 24px rgba(0, 0, 40, 0.08);
+  --uf-surface-page-light: #f8fafc;
+  --uf-surface-input: #f1f5f9;
+  --uf-text-primary: #1e293b;
+  --uf-text-secondary: #64748b;
+  --uf-border-color: #cbd5e1;
+  --uf-primary-blue: #0c53a0;
+  --uf-primary-blue-dark: #08427a;
+  --uf-primary-green: #10b981;
+  --uf-primary-green-dark: #059669;
+  --uf-primary-red: #ef4444;
+  --uf-primary-red-dark: #dc2626;
+  --uf-skill-pill-bg: #e0e7ff;
+  --uf-skill-pill-text: #4338ca;
+  --uf-header-offset: 5.5rem;
+}
+
+[data-theme="dark"] {
+  --uf-surface-card-light: #1f2937;
+  --uf-card-border-light: #374151;
+  --uf-card-shadow-light: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --uf-surface-page-light: #111827;
+  --uf-surface-input: #374151;
+  --uf-text-primary: #f9fafb;
+  --uf-text-secondary: #9ca3af;
+  --uf-border-color: #4b5563;
+  --uf-skill-pill-bg: rgba(99, 102, 241, 0.1);
+  --uf-skill-pill-text: #a5b4fc;
+}
+
+/* === FULL SCREEN LAYOUT === */
+.uf-user-form-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--uf-surface-page-light);
+  min-height: 100vh;
+  display: flex;
+  gap: 2.5rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 1rem 2rem 2rem;
+  z-index: 1000;
+  color: var(--uf-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* === LEFT COLUMN - NAVIGATION === */
+.uf-left-column {
+  flex: 0 0 400px;
+}
+
+.uf-header {
+  margin-bottom: 2rem;
+}
+
+.uf-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--uf-primary-blue);
+  letter-spacing: -0.02em;
+}
+
+.uf-subtitle {
+  font-size: 1rem;
+  color: var(--uf-text-secondary);
+  line-height: 1.5;
+}
+
+.uf-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Tab Navigation */
+.uf-tab-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.uf-tab-navigation-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--uf-text-primary);
+  margin: 0;
+}
+
+.uf-tab-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.uf-tab-btn {
+  background: transparent;
+  color: var(--uf-text-secondary);
+  font-weight: 500;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.2s;
+  border: none;
+}
+
+.uf-tab-btn:hover:not(:disabled) {
+  color: var(--uf-primary-blue);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.uf-tab-btn.uf-active {
+  color: var(--uf-primary-blue);
+  font-weight: 600;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 1px var(--uf-primary-blue);
+}
+
+.uf-tab-check {
+  color: var(--uf-primary-green);
+  margin-left: auto;
+}
+
+/* === RIGHT COLUMN - FORM CONTENT === */
+.uf-right-column {
+  flex: 1;
+  padding-top: 1.5rem;
+  min-width: 0;
+}
+
+.uf-content-container {
+  background: var(--uf-surface-card-light);
+  border: 1px solid var(--uf-card-border-light);
+  border-radius: 1rem;
+  box-shadow: var(--uf-card-shadow-light);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--uf-header-offset));
+}
+
+/* Form Header */
+.uf-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--uf-card-border-light);
+  gap: 1rem;
+}
+
+.uf-form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--uf-text-primary);
+  margin: 0;
+}
+
+.uf-form-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.uf-step-counter {
+  background: var(--uf-skill-pill-bg);
+  color: var(--uf-skill-pill-text);
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.uf-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Navigation Controls */
+.uf-nav-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.uf-nav-btn {
+  background: var(--uf-surface-input);
+  color: var(--uf-text-primary);
+  padding: 0.6rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  border: none;
+}
+
+.uf-nav-btn:hover:not(:disabled) {
+  background: var(--uf-primary-blue);
+  color: white;
+}
+
+.uf-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.uf-nav-btn.uf-save {
+  background-color: var(--uf-primary-green);
+  color: #fff;
+}
+
+.uf-nav-btn.uf-save:hover:not(:disabled) {
+  background-color: var(--uf-primary-green-dark);
+}
+
+/* Form Content Area */
+.uf-form-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-right: 0.5rem;
+}
+
+/* === UNIFIED FORM CARD STRUCTURE === */
+.uf-unified-card {
+  position: relative;
+  background: var(--uf-surface-page-light);
+  border: 1px solid var(--uf-card-border-light);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.uf-unified-card:hover {
+  border-color: var(--uf-primary-blue);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* === SLIDING PANEL SYSTEM === */
+.uf-main-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.uf-unified-card .uf-main-content.uf-panel-open {
+  transform: translateX(-350px);
+}
+
+.uf-sliding-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background: var(--uf-surface-card-light);
+  border-left: 1px solid var(--uf-border-color);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.uf-sliding-panel.uf-open {
+  transform: translateX(0);
+}
+
+.uf-panel-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--uf-border-color);
+  background: var(--uf-surface-page-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.uf-panel-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--uf-text-primary);
+}
+
+.uf-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.uf-panel-close {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--uf-text-secondary);
+}
+
+.uf-panel-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--uf-primary-red);
+}
+
+/* Panel Toggle Button */
+.uf-panel-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 0.75rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--uf-text-primary);
+  z-index: 5;
+}
+
+.uf-panel-toggle:hover {
+  background: rgba(107, 114, 128, 0.2);
+}
+
+/* === FORM ELEMENTS === */
+.uf-section {
+  width: 100%;
+}
+
+.uf-section-title {
+  margin-bottom: 2rem;
+}
+
+.uf-section-title h4 {
+  margin: 0;
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  font-weight: 600;
+  color: var(--uf-text-primary);
+}
+
+/* Form Groups & Inputs */
+.uf-form-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.uf-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--uf-text-primary);
+  font-size: 0.9rem;
+}
+
+.uf-form-input,
+textarea.uf-form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--uf-border-color);
+  border-radius: 0.7rem;
+  background: var(--uf-surface-input);
+  color: var(--uf-text-primary);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.uf-form-input:hover {
+  border-color: var(--uf-primary-blue);
+}
+
+.uf-form-input:focus,
+textarea.uf-form-input:focus {
+  outline: none;
+  border-color: var(--uf-primary-blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.uf-form-input::placeholder {
+  color: var(--uf-text-secondary);
+}
+
+textarea.uf-form-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Grid Layout */
+.uf-form-row {
+  display: grid;
+  gap: 1rem;
+}
+
+.uf-form-row.uf-two-columns {
+  grid-template-columns: 1fr 1fr;
+}
+
+.uf-form-row.uf-three-columns {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* === BUTTONS === */
+.uf-btn {
+  background: var(--uf-primary-blue);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uf-btn:hover:not(:disabled) {
+  background: var(--uf-primary-blue-dark);
+  transform: translateY(-1px);
+}
+
+.uf-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.uf-btn-large {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  min-width: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+}
+
+.uf-btn-large:hover:not(:disabled) {
+  background: var(--uf-primary-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(12, 83, 160, 0.3);
+}
+
+.uf-remove-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--uf-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.uf-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--uf-primary-red);
+}
+
+/* === SKILLS SECTION - FIXED ALIGNMENT === */
+.uf-skills-input {
+  margin-bottom: 1.5rem;
+}
+
+.uf-skills-row {
+  display: flex;
+  align-items: flex-end; /* Align to bottom for consistent baseline */
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.uf-skills-search {
+  flex: 2.5;
+  min-width: 200px;
+  margin-bottom: 0; /* Remove margin for alignment */
+}
+
+.uf-skills-add {
+  flex: 0 0 auto;
+  margin-bottom: 0; /* Remove margin for alignment */
+}
+
+/* Ensure form groups in skills row have no bottom margin */
+.uf-skills-row .uf-form-group {
+  margin-bottom: 0;
+}
+
+/* Ensure consistent heights */
+.uf-skills-row .uf-form-input {
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.uf-skills-row .uf-btn {
+  height: 48px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.uf-skills-divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0 1.5rem 0;
+  gap: 1rem;
+}
+
+.uf-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--uf-border-color);
+}
+
+.uf-divider-text {
+  color: var(--uf-text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.uf-skills-display {
+  min-height: 120px;
+}
+
+.uf-skills-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border: 2px dashed var(--uf-border-color);
+  border-radius: 0.75rem;
+  background: var(--uf-surface-input);
+}
+
+.uf-skills-placeholder p {
+  color: var(--uf-text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+}
+
+.uf-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0;
+}
+
+.uf-skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--uf-skill-pill-bg);
+  color: var(--uf-skill-pill-text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.uf-skill-chip:hover {
+  border-color: var(--uf-primary-blue);
+  transform: translateY(-1px);
+}
+
+.uf-skill-chip button {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 50%;
+}
+
+.uf-skill-chip button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* === PANEL ITEMS === */
+.uf-panel-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border: 1px solid var(--uf-border-color);
+  border-radius: 0.75rem;
+  background: var(--uf-surface-input);
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.uf-panel-item:hover {
+  border-color: var(--uf-primary-blue);
+  background: var(--uf-surface-card-light);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.uf-panel-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Form Actions */
+.uf-form-actions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--uf-border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Form Placeholder */
+.uf-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 400px;
+  text-align: center;
+  color: var(--uf-text-secondary);
+  padding: 2rem;
+}
+
+.uf-placeholder-content {
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.uf-placeholder-content h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  color: var(--uf-text-primary);
+  font-weight: 600;
+}
+
+.uf-placeholder-content p {
+  margin: 0 0 2rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--uf-text-secondary);
+}
+
+/* === MESSAGES === */
+.uf-error-message {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1rem 2rem;
+  border-left: 4px solid #dc2626;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+  border-radius: 0 8px 8px 0;
+}
+
+.uf-success-message {
+  background: #f0fdf4;
+  color: #059669;
+  padding: 1rem 2rem;
+  border-left: 4px solid #059669;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+  border-radius: 0 8px 8px 0;
+}
+
+/* === ANIMATIONS === */
+@keyframes uf-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.uf-animate-spin {
+  animation: uf-spin 1s linear infinite;
+}
+
+@keyframes uf-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Button Focus States */
+button:focus-visible {
+  outline: 2px solid var(--uf-primary-blue);
+  outline-offset: 2px;
+}
+
+/* === DARK THEME === */
+[data-theme="dark"] .uf-unified-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .uf-skills-placeholder {
+  border-color: #374151;
+  background: #1f2937;
+}
+
+[data-theme="dark"] .uf-divider-line {
+  background: #374151;
+}
+
+[data-theme="dark"] .uf-skill-chip:hover {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .uf-panel-item {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .uf-panel-item:hover {
+  background: #1f2937;
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .uf-sliding-panel {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .uf-panel-header {
+  background: #111827;
+  border-color: #374151;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1200px) {
+  .uf-user-form-page {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .uf-left-column,
+  .uf-right-column {
+    padding-top: 0;
+  }
+
+  .uf-content-container {
+    height: auto;
+    min-height: 80vh;
+  }
+
+  .uf-unified-card .uf-main-content.uf-panel-open {
+    transform: translateX(-300px);
+  }
+
+  .uf-sliding-panel {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .uf-header {
+    text-align: center;
+  }
+
+  .uf-form-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .uf-tab-list {
+    grid-template-columns: 1fr;
+  }
+
+  .uf-form-row.uf-two-columns,
+  .uf-form-row.uf-three-columns {
+    grid-template-columns: 1fr;
+  }
+
+  /* Skills responsive layout */
+  .uf-skills-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .uf-skills-search {
+    flex: 1;
+    min-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .uf-skills-add {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .uf-skills-row .uf-btn {
+    width: 100%;
+    height: 48px;
+  }
+
+  .uf-form-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .uf-form-actions button {
+    width: 100%;
+  }
+
+  .uf-placeholder {
+    min-height: 300px;
+    padding: 1.5rem;
+  }
+
+  .uf-placeholder-content {
+    padding: 1.5rem;
+  }
+
+  .uf-btn-large {
+    min-width: 180px;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .uf-user-form-page {
+    padding: 0.5rem;
+  }
+
+  .uf-content-container {
+    padding: 1rem;
+  }
+
+  .uf-nav-controls {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .uf-unified-card .uf-main-content.uf-panel-open {
+    transform: translateX(-100%);
+  }
+
+  .uf-sliding-panel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .uf-unified-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .uf-form-group label {
+    font-size: 0.85rem;
+  }
+
+  .uf-form-input,
+  textarea.uf-form-input {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .uf-skill-chip {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .uf-skills-row .uf-btn {
+    height: 44px;
+  }
+
+  .uf-section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .uf-form-actions {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .uf-placeholder {
+    min-height: 250px;
+    padding: 1rem;
+  }
+
+  .uf-placeholder-content {
+    padding: 1rem;
+  }
+
+  .uf-btn-large {
+    width: 100%;
+    min-width: auto;
+  }
+}
