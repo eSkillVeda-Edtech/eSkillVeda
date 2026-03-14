@@ -1,92 +1,85 @@
-import React, { useState, useMemo } from 'react';
-import { BookOpen, Code2, Briefcase, TrendingUp, Search } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import './Courses.css';
-import { motion } from 'framer-motion';
+import React, { useState, useMemo } from "react";
+import { BookOpen, Cpu, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // NEW: Import useNavigate
+import "./Courses.css";
+import { motion } from "framer-motion";
 
 // --- DATA ---
 const coursesData = [
   {
-    id: 1,
-    title: 'React Development Bootcamp',
-    skills: ['React', 'Hooks', 'Context', 'Best Practices'],
-    category: 'Programming',
-    status: 'Active',
-    duration: '8 weeks',
-    level: 'Beginner'
+    id: "ai-engineering", // MODIFIED: Changed from 1 to a URL-friendly slug
+    title: "AI Engineering Mastery",
+    skills: [
+      "Machine Learning",
+      "Neural Networks",
+      "Python",
+      "LLMs",
+      "Prompt Engineering",
+    ],
+    category: "Artificial Intelligence",
+    status: "Active",
+    duration: "12 weeks",
+    level: "Advanced",
   },
-  {
-    id: 2,
-    title: 'Business Strategy Fundamentals',
-    skills: ['Strategy', 'Market Analysis'],
-    category: 'Business',
-    status: 'Active',
-    duration: '6 weeks',
-    level: 'Intermediate'
-  },
-  {
-    id: 3,
-    title: 'Career Development Workshop',
-    skills: ['Career Growth', 'Soft Skills', 'Leadership'],
-    category: 'Career',
-    status: 'Coming Soon',
-    duration: '4 weeks',
-    level: 'All Levels'
-  },
-  {
-    id: 4,
-    title: 'UI/UX Design Principles',
-    skills: ['User Research', 'Design Thinking'],
-    category: 'Design',
-    status: 'Active',
-    duration: '10 weeks',
-    level: 'Beginner'
-  }
 ];
 
 // --- HELPER FUNCTION ---
 function getCourseIcon(category) {
   switch (category) {
-    case 'Programming': return Code2;
-    case 'Business': return Briefcase;
-    case 'Career': return TrendingUp;
-    case 'Design': return BookOpen;
-    default: return BookOpen;
+    case "Artificial Intelligence":
+      return Cpu;
+    default:
+      return BookOpen;
   }
 }
 
 // --- COURSE CARD COMPONENT ---
 const CourseCard = ({ course, onEnroll }) => {
   const Icon = getCourseIcon(course.category);
-  const isComingSoon = course.status === 'Coming Soon';
+  const isComingSoon = course.status === "Coming Soon";
 
   return (
-    <motion.div 
+    <motion.div
       className="course-card"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2 }}
+      aria-label={`Course: ${course.title}`}
     >
-      <div className="course-card-icon"><Icon /></div>
-      <div className="course-card-info">
+      <div className="course-card-header">
+        <div className="course-card-icon">
+          <Icon aria-hidden="true" />
+        </div>
         <h3 className="course-card-title">{course.title}</h3>
-        <p className="course-card-details">{course.duration} • {course.level}</p>
+      </div>
+
+      <div className="course-card-info">
+        <p className="course-card-details">
+          {course.duration} • {course.level}
+        </p>
         <div className="course-skills">
           {course.skills.map((skill, index) => (
-            <span key={index} className="course-skill-pill">{skill}</span>
+            <span
+              key={`${course.id}-skill-${index}`}
+              className="course-skill-pill"
+            >
+              {skill}
+            </span>
           ))}
         </div>
       </div>
-      <button 
-        className={`course-enroll-btn ${isComingSoon ? 'disabled' : ''}`}
+
+      <button
+        className={`course-enroll-btn ${isComingSoon ? "disabled" : ""}`}
         disabled={isComingSoon}
         onClick={(e) => {
           e.stopPropagation();
           if (!isComingSoon) onEnroll(course);
         }}
+        aria-disabled={isComingSoon}
       >
-        {isComingSoon ? 'Coming Soon' : 'Enroll'}
+        {isComingSoon ? "Coming Soon" : "View Roadmap"}{" "}
+        {/* Optional text change */}
       </button>
     </motion.div>
   );
@@ -94,64 +87,65 @@ const CourseCard = ({ course, onEnroll }) => {
 
 // --- MAIN COURSES COMPONENT ---
 const Courses = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate(); // NEW: Initialize navigation hook
 
-  // Simplified filter logic - only search term
   const filteredCourses = useMemo(() => {
-    return coursesData.filter(course => {
-      const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           course.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
-      return matchesSearch;
+    if (!searchTerm.trim()) return coursesData;
+
+    const lowerCaseSearch = searchTerm.toLowerCase();
+    return coursesData.filter((course) => {
+      return (
+        course.title.toLowerCase().includes(lowerCaseSearch) ||
+        course.skills.some((skill) =>
+          skill.toLowerCase().includes(lowerCaseSearch),
+        )
+      );
     });
   }, [searchTerm]);
 
   const handleEnrollCourse = (course) => {
-    if (course.status === 'Coming Soon') return;
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
+    if (course.status === "Coming Soon") return;
+    // MODIFIED: Navigate directly to the roadmap page using the course slug
+    navigate(`/roadmap/${course.id}`);
   };
 
   return (
     <div className="courses-page">
-      {/* --- LEFT COLUMN --- */}
       <div className="courses-left-column">
         <div className="courses-header">
           <h1 className="courses-title">Courses</h1>
           <p className="courses-subtitle">
-            Learn in-demand programming, business, design & career skills
+            Master the future of technology with our specialized curriculum.
           </p>
         </div>
-        {/* Category filters removed */}
+
         <div className="search-container">
-          <Search className="search-icon" size={20} />
+          <Search className="search-icon" size={20} aria-hidden="true" />
           <input
             type="text"
-            placeholder="Search courses..."
+            placeholder="Search courses or skills..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="courses-search"
+            aria-label="Search courses"
           />
         </div>
       </div>
 
-      {/* --- RIGHT COLUMN --- */}
       <div className="courses-right-column">
         <div className="courses-list">
           {filteredCourses.length > 0 ? (
-            filteredCourses.map(course => (
-              <CourseCard 
-                key={course.id} 
-                course={course} 
+            filteredCourses.map((course) => (
+              <CourseCard
+                key={course.id}
+                course={course}
                 onEnroll={handleEnrollCourse}
               />
             ))
           ) : (
-            <div className="courses-empty">
-              No courses found matching your criteria.
+            <div className="courses-empty" role="status">
+              No courses found matching "{searchTerm}".
             </div>
           )}
         </div>
@@ -161,4 +155,3 @@ const Courses = () => {
 };
 
 export default Courses;
-

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Mic, GitFork, Search } from 'lucide-react';
@@ -44,16 +45,27 @@ const ToolCard = ({ tool, onUse }) => {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2 }}
+      aria-label={`Tool: ${tool.name}`}
     >
-      <div className="tool-icon"><Icon /></div>
-      <div className="tool-info">
+      {/* NEW: Grouped icon and title in a single header row */}
+      <div className="tool-card-header">
+        <div className="tool-icon">
+          <Icon aria-hidden="true" />
+        </div>
         <h3 className="tool-title">{tool.name}</h3>
+      </div>
+      
+      {/* INFO: Remaining details (skills) grouped below */}
+      <div className="tool-info">
         <div className="tool-skills">
           {tool.skills.map((skill, idx) => (
-            <span key={idx} className="tool-skill-pill">{skill}</span>
+            <span key={`${tool.id}-skill-${idx}`} className="tool-skill-pill">
+              {skill}
+            </span>
           ))}
         </div>
       </div>
+      
       <button
         className={`tool-use-btn ${isComingSoon ? 'disabled' : ''}`}
         disabled={isComingSoon}
@@ -61,6 +73,7 @@ const ToolCard = ({ tool, onUse }) => {
           e.preventDefault();
           if (!isComingSoon) onUse(tool);
         }}
+        aria-disabled={isComingSoon}
       >
         {isComingSoon ? 'Coming Soon' : 'Use Tool'}
       </button>

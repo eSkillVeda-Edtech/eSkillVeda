@@ -12,6 +12,7 @@ import RequireAuth from './components/auth/RequireAuth';
 import Home from './pages/HomePage/HomePage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Courses from './pages/Courses/Courses';
+import Roadmap from "./pages/Courses/Roadmap/roadmap";
 import AuthPage from './pages/AuthPage/AuthPage';
 import ResumeHomePage from './pages/AI-Tool/AI-Resume-Builder/ResumeHomePage/ResumeHomePage';
 import { ResumeProvider } from './pages/AI-Tool/AI-Resume-Builder/context/ResumeContext';
@@ -33,49 +34,90 @@ function App() {
   const shouldShowFooter = !noFooterPaths.some(path => location.pathname.startsWith(path));
 
   return (
-    <div 
-      className={`app ${theme}`} 
+    <div
+      className={`app ${theme}`}
       data-theme={theme}
-      style={{ 
-        minHeight: '100vh', 
-        display: 'flex', 
-        flexDirection: 'column',
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
         margin: 0,
-        padding: 0
+        padding: 0,
       }}
     >
       <ScrollToTop />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <main 
+      <main
         className="main-content"
-        style={{ 
-          flex: '1 0 auto',
+        style={{
+          flex: "1 0 auto",
           margin: 0,
-          padding: 0
+          padding: 0,
         }}
       >
         <Routes>
           {/* Core Pages */}
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/roadmap/:courseId" element={<Roadmap />} />
           <Route path="/auth" element={<AuthPage />} />
-          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
 
           {/* Resume Builder Routes */}
-          <Route path="/resume-homepage" element={<RequireAuth><ResumeProvider><ResumeHomePage /></ResumeProvider></RequireAuth>} />
-          <Route path="/resume-builder" element={<RequireAuth><ResumeProvider><ProtectedResumeBuilder /></ResumeProvider></RequireAuth>} />
+          <Route
+            path="/resume-homepage"
+            element={
+              <RequireAuth>
+                <ResumeProvider>
+                  <ResumeHomePage />
+                </ResumeProvider>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/resume-builder"
+            element={
+              <RequireAuth>
+                <ResumeProvider>
+                  <ProtectedResumeBuilder />
+                </ResumeProvider>
+              </RequireAuth>
+            }
+          />
 
           {/* AI Tools */}
           <Route path="/ai-tools" element={<AI_ToolsPage />} />
 
-
           {/* Blog Pages */}
           <Route path="/blogs" element={<AllBlogsPage isUserPage={false} />} />
-          <Route path="/user/blogs" element={<AllBlogsPage isUserPage={true} />} />
-          <Route path="/blogs/create" element={<RequireAuth><CreateBlogPage /></RequireAuth>} />
-          <Route path="/blogs/edit/:id" element={<RequireAuth><CreateBlogPage /></RequireAuth>} />
+          <Route
+            path="/user/blogs"
+            element={<AllBlogsPage isUserPage={true} />}
+          />
+          <Route
+            path="/blogs/create"
+            element={
+              <RequireAuth>
+                <CreateBlogPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/blogs/edit/:id"
+            element={
+              <RequireAuth>
+                <CreateBlogPage />
+              </RequireAuth>
+            }
+          />
           <Route path="/blogs/:id" element={<BlogViewPage />} />
-
 
           {/* Additional Routes */}
           <Route path="/features" element={<CombinedSections />} />

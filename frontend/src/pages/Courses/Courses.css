@@ -113,12 +113,19 @@ body,
   transition: transform 0.2s, box-shadow 0.3s, background 0.2s, border 0.2s;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem; /* Slightly increased gap to separate header from info */
   min-height: 180px;
 }
 .course-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 48px rgba(59,130,246,0.15);
+}
+
+/* NEW: Flex container for the icon and title */
+.course-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .course-card-icon {
@@ -133,17 +140,20 @@ body,
   font-size: 1.5rem;
   flex-shrink: 0;
 }
+
 .course-card-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
+
 .course-card-title {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
+  line-height: 1.2; /* Ensures multi-line titles stay compact */
 }
 .course-card-details {
   font-size: 0.95rem;
