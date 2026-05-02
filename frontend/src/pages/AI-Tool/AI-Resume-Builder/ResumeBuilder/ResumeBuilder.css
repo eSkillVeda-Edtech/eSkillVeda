@@ -65,7 +65,7 @@ button:focus-visible {
 
 body,
 .resume-builder-page {
-  background: var(--surface-page-light);
+    
   color: var(--text-primary);
 }
 
@@ -87,7 +87,7 @@ body,
 
 /* --- Base & Layout --- */
 .resume-builder-page {
-  background: var(--surface-page-light);
+    
   display: flex;
   gap: 2.5rem;
   max-width: 1500px;

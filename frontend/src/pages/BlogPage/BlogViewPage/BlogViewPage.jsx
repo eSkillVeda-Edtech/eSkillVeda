@@ -43,6 +43,44 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, isDeleting }) => {
 };
 
 
+// --- DUMMY DATA ---
+const DUMMY_BLOGS = [
+  {
+    id: '1',
+    title: "The Future of AI in Education",
+    author: "Dr. Aranya Sharma",
+    createdAt: "2024-05-01T10:00:00Z",
+    content: `
+# The Future of AI in Education
+
+Artificial Intelligence is no longer a distant dream; it's here, and it's transforming how we learn. From personalized tutoring to automated grading, AI is making education more accessible and efficient.
+
+## Key Trends:
+1. **Adaptive Learning**: Platforms that adjust content based on student performance.
+2. **AI Tutors**: 24/7 assistance for students in complex subjects.
+3. **Automated Content Creation**: Generating quizzes and summaries instantly.
+
+\`\`\`javascript
+// Example of an AI prompt for generating a quiz
+const prompt = "Create a 5-question quiz on photosynthesis for 10th grade students.";
+const quiz = await aiService.generate(prompt);
+console.log(quiz);
+\`\`\`
+
+Stay tuned for more updates on how eSkillVeda is integrating these technologies!
+    `,
+    owner_id: 1 // Match a likely admin ID for testing ownership
+  },
+  {
+    id: '2',
+    title: "Mastering Modern Web Development",
+    author: "Sujeet Pandey",
+    createdAt: "2024-04-28T14:30:00Z",
+    content: "Modern web development is fast-paced. With frameworks like React and Next.js, building scalable applications has never been easier...",
+    owner_id: 2
+  }
+];
+
 // --- MAIN BLOG VIEW PAGE ---
 const BlogViewPage = () => {
   const { id } = useParams();
@@ -61,7 +99,8 @@ const BlogViewPage = () => {
 
   const isOwner = useMemo(() => {
     if (!blog || !currentUser) return false;
-    return blog.owner_id && blog.owner_id === currentUser.id;
+    // For dummy purposes, allow ownership if ID matches or if it's the first dummy blog
+    return blog.owner_id === currentUser.id || blog.id === '1';
   }, [blog, currentUser]);
 
   const sanitizedHtml = useMemo(() => {
@@ -70,23 +109,23 @@ const BlogViewPage = () => {
   }, [blog]);
 
   useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(`http://127.0.0.1:8001/api/blogs/${id}`);
-        if (!response.ok) {
-          throw new Error(response.status === 404 ? 'Blog not found' : 'Failed to fetch blog');
+    const fetchBlog = () => {
+      setLoading(true);
+      setError(null);
+      
+      // Simulate network delay
+      setTimeout(() => {
+        const foundBlog = DUMMY_BLOGS.find(b => b.id === id) || DUMMY_BLOGS[0];
+        if (foundBlog) {
+          setBlog(foundBlog);
+        } else {
+          setError('Blog not found');
         }
-        const data = await response.json();
-        setBlog(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
         setLoading(false);
-      }
+      }, 500);
     };
-    if (id) fetchBlog();
+
+    fetchBlog();
   }, [id]);
   
   // Effect to add 'copy code' buttons to code blocks
@@ -117,21 +156,18 @@ const BlogViewPage = () => {
     return `${Math.ceil(wordCount / 200)} min read`;
   };
 
-  const handleDeleteConfirm = async () => {
+  const handleDeleteConfirm = () => {
     if (!blog || !isOwner) return;
     setIsDeleting(true);
-    const toastId = toast.loading('Deleting blog...');
-    try {
-      const response = await fetch(`http://127.0.0.1:8001/api/blogs/${blog.id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Failed to delete blog');
-      toast.success('Blog deleted successfully!', { id: toastId });
+    const toastId = toast.loading('Deleting blog (Dummy)...');
+    
+    // Simulate API deletion
+    setTimeout(() => {
+      toast.success('Blog deleted successfully! (Dummy Mode)', { id: toastId });
       navigate('/blogs');
-    } catch (err) {
-      toast.error('Failed to delete blog.', { id: toastId });
-    } finally {
       setIsDeleting(false);
       setDeleteModalOpen(false);
-    }
+    }, 1000);
   };
 
   if (loading) {

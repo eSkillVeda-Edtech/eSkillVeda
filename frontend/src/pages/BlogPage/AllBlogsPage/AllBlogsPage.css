@@ -1,14 +1,14 @@
 /* === ROOT VARIABLES & BASE STYLES === */
 
 body {
-  background: var(--surface-page-light);
+    
 }
 
 /* === MAIN PAGE LAYOUT === */
 
 .all-blogs-page {
   min-height: 100vh;
-  background: var(--surface-page-light);
+    
   padding-top: 2rem;
   padding-bottom: 2rem;
   display: flex;
@@ -369,7 +369,7 @@ body {
   height: 4rem;
   margin: 0 auto 1.5rem;
   color: var(--text-muted);
-  background: var(--surface-page-light);
+    
   border-radius: 50%;
   border: 1px solid var(--card-border-light);
 }

@@ -1,6 +1,5 @@
 import { useResume } from "../../context/useResume";
 import RichTextEditor from '../TextEditorComponent/RichTextEditor';
-import toast from "react-hot-toast";
 import './Forms.css';
 
 const SummaryForm = () => {

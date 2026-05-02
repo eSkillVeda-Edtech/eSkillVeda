@@ -5,7 +5,7 @@ import {
   Trash2
 } from 'lucide-react';
 import './ResumeHomePage.css';
-import { fetchResumes, generateResumePDF, downloadBlob, deleteResumeById } from '../../../../services/resumeAPI';
+import { fetchResumes, deleteResumeById } from '../../../../services/resumeAPI';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '../../../../contexts/AuthContext.jsx';
 import Pagination from '../../../../components/Pagination/Pagination';
@@ -72,6 +72,7 @@ const ResumeHomePage = () => {
   const handleCreateNew = () => navigate('/resume-builder', { state: { fromHomepage: true } });
   const handleEdit = (resumeId) => navigate(`/resume-builder?resume_id=${resumeId}`, { state: { fromHomepage: true } });
 
+  /*
   const handleDownload = async (resume) => {
     const templateFileName = `${(resume.templateUsed || 'onyx').toLowerCase()}.html.j2`;
     toast.loading("Generating PDF...", { id: `pdf-${resume.id}` });
@@ -84,6 +85,7 @@ const ResumeHomePage = () => {
       toast.error("Could not generate PDF.", { id: `pdf-${resume.id}` });
     }
   };
+  */
 
   const handleDelete = async (resumeId) => {
     const originalResumes = [...resumes];

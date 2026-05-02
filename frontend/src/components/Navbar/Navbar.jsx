@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import { Sun, Moon, Menu, X, User } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = ({ toggleTheme, theme }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useAuth();
 
   const navLinks = [
     { label: 'Home', url: '/' },
@@ -40,11 +38,11 @@ const Navbar = ({ toggleTheme, theme }) => {
     navigate(url);
   };
 
-  const handleLogout = () => {
-    logout();
-    setMobileMenuOpen(false);
-    navigate('/');
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   setMobileMenuOpen(false);
+  //   navigate('/');
+  // };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -89,7 +87,8 @@ const Navbar = ({ toggleTheme, theme }) => {
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </button>
 
-        {/* Desktop Auth - Modified */}
+        {/* Desktop Auth - Hidden for now */}
+        {/* 
         <div className="desktop-auth">
           {isAuthenticated ? (
             <button
@@ -104,7 +103,8 @@ const Navbar = ({ toggleTheme, theme }) => {
               Login
             </button>
           )}
-        </div>
+        </div> 
+        */}
 
         {/* Mobile Menu Button - Only hamburger menu */}
         <button
@@ -139,7 +139,8 @@ const Navbar = ({ toggleTheme, theme }) => {
           ))}
         </div>
 
-        {/* Mobile Auth - Side by Side Layout */}
+        {/* Mobile Auth - Hidden for now */}
+        {/* 
         <div className="mobile-auth">
           {isAuthenticated && (
             <div className="mobile-user-info">
@@ -173,7 +174,8 @@ const Navbar = ({ toggleTheme, theme }) => {
               </button>
             )}
           </div>
-        </div>
+        </div> 
+        */}
       </div>
     </nav>
   );

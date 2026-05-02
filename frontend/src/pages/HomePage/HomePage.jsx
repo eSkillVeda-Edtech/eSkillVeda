@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
+import Mentors from './components/Mentors/Mentors';
 import CombinedSections from './components/CombinedSections';
 import './HomePage.css';
 
@@ -18,6 +19,7 @@ const HomePage = () => {
       
       <main>
         <HeroSection />
+        <Mentors />
         <CombinedSections />
       </main>
     </div>

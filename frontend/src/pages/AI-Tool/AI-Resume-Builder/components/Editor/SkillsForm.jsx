@@ -79,7 +79,7 @@ const SkillsForm = () => {
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setSearchSuggestions(data.skills || []);
-      } catch (err) {
+      } catch {
         setError("Could not fetch skills.");
         setSearchSuggestions([]);
       } finally {

@@ -15,6 +15,49 @@ function getCurrentUser() {
   }
 }
 
+const DUMMY_BLOGS = [
+  {
+    id: '1',
+    title: "The Future of AI in Education",
+    author: "Dr. Aranya Sharma",
+    createdAt: "2024-05-01T10:00:00Z",
+    content: "Artificial Intelligence is no longer a distant dream; it's here, and it's transforming how we learn. From personalized tutoring to automated grading, AI is making education more accessible and efficient...",
+    owner_id: 1
+  },
+  {
+    id: '2',
+    title: "Mastering Modern Web Development",
+    author: "Sujeet Pandey",
+    createdAt: "2024-04-28T14:30:00Z",
+    content: "Modern web development is fast-paced. With frameworks like React and Next.js, building scalable applications has never been easier...",
+    owner_id: 2
+  },
+  {
+    id: '3',
+    title: "Introduction to Quantum Computing",
+    author: "Prof. Vikram Seth",
+    createdAt: "2024-04-20T09:15:00Z",
+    content: "Quantum computing represents a paradigm shift in how we process information. By leveraging the principles of quantum mechanics, we can solve problems that are currently impossible for classical computers...",
+    owner_id: 3
+  },
+  {
+    id: '4',
+    title: "The Art of UX Design",
+    author: "Priya Das",
+    createdAt: "2024-04-15T11:45:00Z",
+    content: "User experience is at the heart of every successful product. Understanding the user's journey and pain points is crucial for creating intuitive designs...",
+    owner_id: 4
+  },
+  {
+    id: '5',
+    title: "Blockchain Beyond Cryptocurrency",
+    author: "Dr. Aranya Sharma",
+    createdAt: "2024-04-10T16:20:00Z",
+    content: "While Bitcoin made blockchain famous, the technology has far-reaching implications for supply chain, healthcare, and digital identity...",
+    owner_id: 1
+  }
+];
+
 const AllBlogsPage = ({ isUserPage = false }) => {
   // State management
   const [blogs, setBlogs] = useState([]);
@@ -33,41 +76,24 @@ const AllBlogsPage = ({ isUserPage = false }) => {
     setSearchTerm('');
   }, [isUserPage]);
 
-  // Fetch blogs based on isUserPage prop
+  // Fetch blogs based on isUserPage prop (using dummy data)
   useEffect(() => {
-    const fetchBlogs = async () => {
-      if (isUserPage && !currentUser?.id) {
-        setLoading(false);
-        setError("You must be logged in to see your blogs.");
-        return;
-      }
-
+    const fetchBlogs = () => {
       setError(null);
       setLoading(true);
 
-      try {
-        const endpoint = isUserPage 
-          ? `http://127.0.0.1:8001/api/blogs/user/${currentUser.id}`
-          : 'http://127.0.0.1:8001/api/blogs/';
+      // Simulate network delay
+      setTimeout(() => {
+        let data = [...DUMMY_BLOGS];
         
-        const response = await fetch(endpoint);
-        
-        if (!response.ok) {
-          if (response.status === 404 && isUserPage) {
-            setBlogs([]);
-            return;
-          }
-          throw new Error(`Failed to fetch blogs (status: ${response.status})`);
+        if (isUserPage) {
+          // Filter for dummy user (Dr. Aranya Sharma / owner_id 1)
+          data = data.filter(blog => blog.owner_id === 1);
         }
-        
-        const data = await response.json();
-        setBlogs(data); // Removed date sorting
-      } catch (err) {
-        setError('Failed to fetch blogs');
-        console.error('Error fetching blogs:', err);
-      } finally {
+
+        setBlogs(data);
         setLoading(false);
-      }
+      }, 800);
     };
 
     fetchBlogs();

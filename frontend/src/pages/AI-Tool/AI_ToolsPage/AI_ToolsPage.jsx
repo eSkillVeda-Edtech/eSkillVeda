@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { useState, useMemo } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { FileText, Mic, GitFork, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +32,14 @@ const aiTools = [
     status: 'Coming Soon',
     path: '#',
     icon: GitFork,
+  },
+  {
+    id: 4,
+    name: 'Explore More Tools',
+    skills: ['Many Tools Available'],
+    status: 'Active',
+    path: 'https://eskillveda-ai-c2oh.onrender.com',
+    icon: Search,
   }
 ];
 
@@ -102,7 +111,11 @@ const AI_ToolsPage = () => {
       return;
     }
     if (tool.status === 'Active' && tool.path && tool.path !== '#') {
-      navigate(tool.path);
+      if (tool.path.startsWith('http')) {
+        window.open(tool.path, '_blank');
+      } else {
+        navigate(tool.path);
+      }
     }
   };
 

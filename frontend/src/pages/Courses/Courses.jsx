@@ -1,25 +1,20 @@
 import React, { useState, useMemo } from "react";
-import { BookOpen, Cpu, Search } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // NEW: Import useNavigate
-import "./Courses.css";
+import { BookOpen, Cpu, Database, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import "./Courses.css";
 
 // --- DATA ---
 const coursesData = [
   {
-    id: "ai-engineering", // MODIFIED: Changed from 1 to a URL-friendly slug
-    title: "AI Engineering Mastery",
-    skills: [
-      "Machine Learning",
-      "Neural Networks",
-      "Python",
-      "LLMs",
-      "Prompt Engineering",
-    ],
-    category: "Artificial Intelligence",
+    id: "rag-for-beginners", // MUST match data.js key
+    title: "RAG for Beginners",
+    skills: ["Vector Databases", "Embeddings", "Python", "LLMs", "Data Chunking"],
+    category: "Data & AI",
     status: "Active",
-    duration: "12 weeks",
-    level: "Advanced",
+    duration: "8 weeks",
+    level: "Beginner",
   },
 ];
 
@@ -28,6 +23,8 @@ function getCourseIcon(category) {
   switch (category) {
     case "Artificial Intelligence":
       return Cpu;
+    case "Data & AI":
+      return Database;
     default:
       return BookOpen;
   }
@@ -41,31 +38,29 @@ const CourseCard = ({ course, onEnroll }) => {
   return (
     <motion.div
       className="course-card"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
       aria-label={`Course: ${course.title}`}
     >
-      <div className="course-card-header">
-        <div className="course-card-icon">
-          <Icon aria-hidden="true" />
+      <div className="course-card-content">
+        <div className="course-card-header">
+          <div className="course-card-icon">
+            <Icon size={24} aria-hidden="true" />
+          </div>
+          <h3 className="course-card-title">{course.title}</h3>
         </div>
-        <h3 className="course-card-title">{course.title}</h3>
-      </div>
 
-      <div className="course-card-info">
-        <p className="course-card-details">
-          {course.duration} • {course.level}
-        </p>
-        <div className="course-skills">
-          {course.skills.map((skill, index) => (
-            <span
-              key={`${course.id}-skill-${index}`}
-              className="course-skill-pill"
-            >
-              {skill}
-            </span>
-          ))}
+        <div className="course-card-info">
+          <p className="course-card-details">
+            {course.duration} • {course.level}
+          </p>
+          <div className="course-skills">
+            {course.skills.map((skill, index) => (
+              <span key={`${course.id}-skill-${index}`} className="course-skill-pill">
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -78,8 +73,7 @@ const CourseCard = ({ course, onEnroll }) => {
         }}
         aria-disabled={isComingSoon}
       >
-        {isComingSoon ? "Coming Soon" : "View Roadmap"}{" "}
-        {/* Optional text change */}
+        {isComingSoon ? "Coming Soon" : "View Roadmap"}
       </button>
     </motion.div>
   );
@@ -88,7 +82,7 @@ const CourseCard = ({ course, onEnroll }) => {
 // --- MAIN COURSES COMPONENT ---
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate(); // NEW: Initialize navigation hook
+  const navigate = useNavigate();
 
   const filteredCourses = useMemo(() => {
     if (!searchTerm.trim()) return coursesData;
@@ -97,16 +91,13 @@ const Courses = () => {
     return coursesData.filter((course) => {
       return (
         course.title.toLowerCase().includes(lowerCaseSearch) ||
-        course.skills.some((skill) =>
-          skill.toLowerCase().includes(lowerCaseSearch),
-        )
+        course.skills.some((skill) => skill.toLowerCase().includes(lowerCaseSearch))
       );
     });
   }, [searchTerm]);
 
   const handleEnrollCourse = (course) => {
     if (course.status === "Coming Soon") return;
-    // MODIFIED: Navigate directly to the roadmap page using the course slug
     navigate(`/roadmap/${course.id}`);
   };
 
@@ -137,11 +128,7 @@ const Courses = () => {
         <div className="courses-list">
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
-              <CourseCard
-                key={course.id}
-                course={course}
-                onEnroll={handleEnrollCourse}
-              />
+              <CourseCard key={course.id} course={course} onEnroll={handleEnrollCourse} />
             ))
           ) : (
             <div className="courses-empty" role="status">

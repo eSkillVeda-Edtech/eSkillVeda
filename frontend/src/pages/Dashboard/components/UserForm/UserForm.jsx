@@ -151,13 +151,13 @@ const UserForm = ({ onClose }) => {
   };
 
   // Panel management functions
-  const handleAddNew = (arrayName) => {
+  const handleAddNew = () => {
     setIsAddingNew(true);
     setEditingIndex(-1);
     setIsPanelOpen(true);
   };
 
-  const handleEdit = (arrayName, index) => {
+  const handleEdit = (index) => {
     setEditingIndex(index);
     setIsAddingNew(true);
     setIsPanelOpen(false);
