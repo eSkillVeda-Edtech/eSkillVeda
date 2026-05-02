@@ -112,7 +112,7 @@ const RichTextEditor = memo(({
     });
   }, [historyIndex]);
 
-  const debouncedSaveToHistory = useCallback(debounce(saveToHistory, 500), [saveToHistory]);
+  const debouncedSaveToHistory = useMemo(() => debounce(saveToHistory, 500), [saveToHistory]);
 
   const handleUndo = useCallback(() => {
     if (historyIndex > 0) {

@@ -44,7 +44,7 @@ const ResumePreview = ({ templateName }) => {
                     compiled = null;
                 }
                 tmplCacheRef.current = { ...tpl, compiled };
-            } catch (e) {
+            } catch {
                 if (!cancelled) setError("Failed to load template.");
             } finally {
                 if (!cancelled) setLoading(false);
@@ -81,7 +81,7 @@ const ResumePreview = ({ templateName }) => {
                     rendered = tmplCacheRef.current.compiled
                         ? tmplCacheRef.current.compiled.render(renderPayload)
                         : nunjucks.renderString(tmplCacheRef.current.html, renderPayload);
-                } catch (e) {
+                } catch {
                     // Fallback to server-side PDF generation on client-render failure
                     setLoading(true);
                     try {
@@ -92,7 +92,7 @@ const ResumePreview = ({ templateName }) => {
                         urlRef.current = nextUrl;
                         setPdfUrl(nextUrl);
                         setViewHtml("");
-                    } catch (serverErr) {
+                    } catch {
                         setError("Failed to render preview. Try again.");
                     } finally {
                         if (currentReqId === reqIdRef.current) setLoading(false);
@@ -126,7 +126,7 @@ const ResumePreview = ({ templateName }) => {
                 setViewHtml(htmlDoc);
                 setIframeHeight("auto"); // Reset height for new content
 
-            } catch (err) {
+            } catch {
                 setError("An error occurred while generating the preview.");
             }
         }, 100);

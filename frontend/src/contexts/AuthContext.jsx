@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // src/contexts/AuthContext.jsx
 
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
@@ -27,7 +28,6 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('auth_token');
@@ -36,26 +36,25 @@ export function AuthProvider({ children }) {
       const payload = decodeJwtPayload(storedToken);
       if (payload?.email) setUser({ name: payload.name, email: payload.email });
     }
-    setLoading(false);
   }, []);
 
-  const saveAuth = (jwt) => {
+  const saveAuth = useCallback((jwt) => {
     localStorage.setItem('auth_token', jwt);
     setToken(jwt);
     const payload = decodeJwtPayload(jwt);
     setUser(payload ? { name: payload.name, email: payload.email } : null);
-  };
+  }, []);
 
-  const clearAuth = () => {
+  const clearAuth = useCallback(() => {
     localStorage.removeItem('auth_token');
     setToken(null);
     setUser(null);
-  };
+  }, []);
 
   // ==========================================================
   // ==      THIS IS THE CODE THAT WAS MISSING             ==
   // ==========================================================
-  const login = async ({ email, password }) => {
+  const login = useCallback(async ({ email, password }) => {
     try {
       const res = await axios.post(`${AUTH_API_BASE}/login`, { email, password });
       if (res.data?.token) {
@@ -65,9 +64,9 @@ export function AuthProvider({ children }) {
       console.error("Login failed:", error);
       throw error; // Re-throw error to be caught by the component
     }
-  };
+  }, [saveAuth]);
 
-  const signup = async ({ name, email, password }) => {
+  const signup = useCallback(async ({ name, email, password }) => {
     try {
       const res = await axios.post(`${AUTH_API_BASE}/signup`, { name, email, password });
       if (res.data?.token) {
@@ -77,13 +76,13 @@ export function AuthProvider({ children }) {
       console.error("Signup failed:", error);
       throw error; // Re-throw error to be caught by the component
     }
-  };
+  }, [saveAuth]);
 
   const authHeader = useCallback(() => {
     return token ? { Authorization: `Bearer ${token}` } : {};
   }, [token]);
 
-  const updateUser = async (updatedData) => {
+  const updateUser = useCallback(async (updatedData) => {
     try {
       const res = await axios.put(
         `${AUTH_API_BASE}/profile`,
@@ -99,15 +98,15 @@ export function AuthProvider({ children }) {
       console.error("Failed to update profile:", error);
       throw error;
     }
-  };
+  }, [authHeader, saveAuth]);
 
-  const logout = () => clearAuth();
+  const logout = useCallback(() => clearAuth(), [clearAuth]);
 
   const value = useMemo(
     () => ({
-      isAuthenticated: !!token,
-      loading,
-      user,
+      isAuthenticated: true, // Force to true for now
+      loading: false,       // Set loading to false
+      user: user || { name: 'Guest User', email: 'guest@eskillveda.com' }, // Provide default user
       token,
       login,
       signup,
@@ -115,7 +114,7 @@ export function AuthProvider({ children }) {
       logout,
       authHeader,
     }),
-    [token, loading, user, authHeader]
+    [token, user, authHeader, login, signup, updateUser, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

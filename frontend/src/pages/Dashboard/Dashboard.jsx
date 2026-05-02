@@ -104,7 +104,7 @@ const Dashboard = () => {
       tools: purchasedTools.length,
       blogs: userBlogs.length
     });
-  }, []);
+  }, [enrolledCourses.length]);
 
   // Notification system
   const showNotification = (message, type = 'success') => {
@@ -130,7 +130,7 @@ const Dashboard = () => {
       
       setActiveView('dashboard');
       showNotification('Profile updated successfully!');
-    } catch (error) {
+    } catch {
       showNotification('Failed to update profile. Please try again.', 'error');
     } finally {
       setIsLoading(false);
@@ -177,17 +177,20 @@ const Dashboard = () => {
       <h3 className="Quick-title">Quick Actions</h3>
 
       <div className="quick-actions-list">
-        {quickActions.map(({ title, icon: Icon, onClick }) => (
-          <div className="quick-action-row" key={title}>
-            <div className="qa-left">
-              <span className="qa-icon-wrap"><Icon size={16} /></span>
-              <span className="quick-action-title">{title}</span>
+        {quickActions.map(({ title, icon: ActionIcon, onClick }) => {
+          const Icon = ActionIcon;
+          return (
+            <div className="quick-action-row" key={title}>
+              <div className="qa-left">
+                <span className="qa-icon-wrap"><Icon size={16} /></span>
+                <span className="quick-action-title">{title}</span>
+              </div>
+              <button className="quick-action-btn" onClick={onClick} disabled={isLoading}>
+                {isLoading ? <Loader className="spinning" size={14} /> : 'Open'}
+              </button>
             </div>
-            <button className="quick-action-btn" onClick={onClick} disabled={isLoading}>
-              {isLoading ? <Loader className="spinning" size={14} /> : 'Open'}
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

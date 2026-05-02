@@ -181,8 +181,8 @@ const ResumeBuilder = () => {
             } else {
                 throw new Error("Invalid response from server");
             }
-        } catch (e) {
-            toast.error(`Failed to save resume: ${e.message}`, { id: toastId });
+        } catch (error) {
+            toast.error(`Failed to save resume: ${error.message}`, { id: toastId });
         } finally {
             setIsSaving(false);
         }
@@ -202,7 +202,7 @@ const ResumeBuilder = () => {
 
             downloadBlob(blob, filename);
             toast.success("PDF downloaded!", { id: "pdf-download" });
-        } catch (e) {
+        } catch {
             toast.error("PDF generation failed.", { id: "pdf-download" });
         } finally {
             setIsDownloading(false);

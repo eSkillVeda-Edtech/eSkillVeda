@@ -1,6 +1,6 @@
 import React from 'react';
 // Remove Router import from here, but keep the others
-import { Route, Routes, useLocation } from 'react-router-dom'; 
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom'; 
 import ScrollToTop from './components/ScrolltoTop';
 import { useTheme } from './contexts/ThemeContext';
 import Navbar from './components/Navbar/Navbar';
@@ -60,7 +60,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/roadmap/:courseId" element={<Roadmap />} />
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth" element={<Navigate to="/" replace />} />
           <Route
             path="/dashboard"
             element={

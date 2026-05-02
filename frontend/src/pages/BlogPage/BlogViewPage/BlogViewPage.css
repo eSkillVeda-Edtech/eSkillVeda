@@ -1,7 +1,7 @@
 /* === GENERAL PAGE & ARTICLE STYLES === */
 /* Styles are now scoped to `.blog-view-page` to prevent conflicts */
 .blog-view-page {
-  background: var(--surface-page-light);
+    
   min-height: 100vh;
   padding: 2rem 1rem 4rem; /* Top, H-padding, Bottom */
   display: flex;
@@ -74,7 +74,7 @@
 }
 
 .blog-view-page .actions-menu-button {
-  background: var(--surface-page-light);
+    
   border: 1px solid var(--card-border-light);
   border-radius: 50%;
   width: 44px;

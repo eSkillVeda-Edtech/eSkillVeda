@@ -7,7 +7,7 @@
 
 .form-card {
   position: relative;
-  background: var(--surface-page-light);
+    
   border: 1px solid var(--card-border-light);
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -455,7 +455,7 @@ textarea.form-input {
 .form-panel-header {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
-  background: var(--surface-page-light);
+    
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -525,7 +525,7 @@ textarea.form-input {
 
 .form-panel-item:hover {
   border-color: var(--primary-blue);
-  background: var(--surface-page-light);
+    
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }

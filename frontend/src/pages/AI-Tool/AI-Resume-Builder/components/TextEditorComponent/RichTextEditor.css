@@ -33,7 +33,7 @@
 
     /* Toolbar - UPDATED FOR RESPONSIVENESS */
     .toolbar {
-      background: var(--surface-page-light);
+        
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;

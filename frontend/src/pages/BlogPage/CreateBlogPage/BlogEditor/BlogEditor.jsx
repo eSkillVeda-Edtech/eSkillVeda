@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo, useMemo } from 'react';
 import { 
   Bold, 
   Italic, 
@@ -31,25 +31,29 @@ const debounce = (func, wait) => {
 };
 
 // UI Components
-const ToolbarButton = memo(({ 
-  icon: Icon, 
-  title, 
-  onClick, 
-  disabled = false, 
-  isActive = false,
-  className = ''
-}) => (
-  <button
-    type="button"
-    className={`toolbar-btn ${isActive ? 'active' : ''} ${className}`}
-    onClick={onClick}
-    disabled={disabled}
-    title={title}
-    aria-label={title}
-  >
-    <Icon size={16} />
-  </button>
-));
+const ToolbarButton = memo((props) => {
+  const { 
+    icon: Icon, 
+    title, 
+    onClick, 
+    disabled = false, 
+    isActive = false,
+    className = ''
+  } = props;
+  
+  return (
+    <button
+      type="button"
+      className={`toolbar-btn ${isActive ? 'active' : ''} ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+      title={title}
+      aria-label={title}
+    >
+      <Icon size={16} />
+    </button>
+  );
+});
 ToolbarButton.displayName = 'ToolbarButton';
 
 const LinkModal = ({ isOpen, onClose, onInsert, theme = 'light' }) => {
@@ -179,7 +183,7 @@ const BlogEditor = ({
     });
   }, [historyIndex]);
 
-  const debouncedSaveToHistory = useCallback(debounce(saveToHistory, 1000), [saveToHistory]);
+  const debouncedSaveToHistory = useMemo(() => debounce(saveToHistory, 1000), [saveToHistory]);
 
   const handleUndo = useCallback(() => {
     if (historyIndex > 0) {
@@ -213,7 +217,7 @@ const BlogEditor = ({
     commands.forEach(command => {
       try {
         formats[command] = document.queryCommandState(command);
-      } catch (e) {
+      } catch {
         formats[command] = false;
       }
     });

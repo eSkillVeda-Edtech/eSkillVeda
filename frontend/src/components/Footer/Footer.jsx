@@ -29,8 +29,8 @@ const Footer = ({ theme }) => {
     const socialLinks = [
         { icon: Facebook, href: 'https://facebook.com', name: 'Facebook' },
         { icon: Twitter, href: 'https://twitter.com', name: 'Twitter' },
-        { icon: Linkedin, href: 'https://linkedin.com', name: 'LinkedIn' },
-        { icon: Instagram, href: 'https://instagram.com', name: 'Instagram' }
+        { icon: Linkedin, href: 'https://www.linkedin.com/company/eskillveda-edtech-private-limited/', name: 'LinkedIn' },
+        { icon: Instagram, href: 'https://www.instagram.com/eskillveda.ai', name: 'Instagram' }
     ];
 
     // Inline styles for navbar-style brand
@@ -118,11 +118,11 @@ const Footer = ({ theme }) => {
                         </div>
                         <div className="contact-item">
                             <Phone size={18} />
-                            <span>+91 XXX XXX XXXX</span>
+                            <a href="tel:8792179152" style={{ color: 'inherit', textDecoration: 'none' }}>8792179152</a>
                         </div>
                         <div className="contact-item">
                             <Mail size={18} />
-                            <span>contact@eskillveda.com</span>
+                            <a href="mailto:contact@eskillveda.com" style={{ color: 'inherit', textDecoration: 'none' }}>contact@eskillveda.com</a>
                         </div>
                     </div>
                 </div>

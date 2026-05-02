@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: clamp(1.5rem, 4vw, 3rem);
-    max-width: 1200px;
+max-width: 1400px;
     margin: 0 auto;
     padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem);
     position: relative;
@@ -164,7 +164,7 @@
 }
 
 .footer-bottom-content {
-    max-width: 1200px;
+
     margin: 0 auto;
     padding: 0 clamp(1rem, 3vw, 2rem);
     display: flex;
@@ -196,11 +196,14 @@
 }
 
 @keyframes heartbeat {
-    0%, 100% { 
-        transform: scale(1); 
+
+    0%,
+    100% {
+        transform: scale(1);
     }
-    50% { 
-        transform: scale(1.1); 
+
+    50% {
+        transform: scale(1.1);
     }
 }
 
@@ -222,20 +225,22 @@
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
-    
+
     /* Stack contact info below company info */
     .contact-info {
         grid-column: 1 / -1;
         max-width: 100%;
     }
-    
+
     /* Create 2-column grid for social links */
     .social-links {
         grid-template-columns: repeat(4, 1fr);
         max-width: 200px;
     }
+
     .footer-links {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns on desktop */
     }
 }
 
@@ -259,8 +264,9 @@
         justify-content: center;
     }
 
- .footer-links {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on mobile */
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        /* Keep 2 columns on mobile */
         gap: 0.5rem 0.75rem;
     }
 
@@ -302,11 +308,12 @@
         font-size: 0.9rem;
     }
 
-     .footer-links {
-        grid-template-columns: repeat(2, 1fr); /* Still 2 columns */
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        /* Still 2 columns */
         gap: 0.4rem 0.5rem;
     }
-    
+
     .footer-links a {
         font-size: 0.8rem;
         padding: 0.3rem 0;
@@ -331,26 +338,28 @@
     .footer-content {
         padding: 1rem 0.75rem;
     }
-    
+
     /* Ultra-compact social links */
     .social-links {
         grid-template-columns: repeat(3, 1fr);
         max-width: 120px;
         gap: 0.4rem;
     }
-    
+
     .social-link {
         width: 28px;
         height: 28px;
         font-size: 0.8rem;
     }
-    
+
     .contact-item {
         font-size: 0.75rem;
         gap: 0.4rem;
     }
+
     .footer-links {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;
+        /* Single column on very small screens */
         gap: 0.3rem;
     }
 }
